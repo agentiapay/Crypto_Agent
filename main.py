@@ -52,8 +52,8 @@ crypto_signals = []
 #     else:
 #         return JSONResponse(content={"message": "No signals yet"}, status_code=404)
         
-@app.on_event("startup")
-async def startup():
+@app.get("capture")
+async def capture():
     global playwright, browser, context, page
     print("🚀 Launching browser...")
     playwright = await async_playwright().start()
@@ -63,14 +63,6 @@ async def startup():
     )
     page = await context.new_page()
     asyncio.create_task(capture_loop())  # Background screenshot loop
-
-@app.on_event("shutdown")
-async def shutdown():
-    if browser:
-        await browser.close()
-    if playwright:
-        await playwright.stop()
-    print("🛑 Browser closed.")
 
 async def capture_loop():
     while True:
