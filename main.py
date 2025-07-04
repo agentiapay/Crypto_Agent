@@ -169,5 +169,6 @@ Be decisive, think deeply, and aim to give a **profitable signal**.
 
 @app.get("/")
 def Crypto_Agent():
-    return {"trader":crypto_signals[-1]}
+  
+  return {"trader":crypto_signals[-1]}
 
