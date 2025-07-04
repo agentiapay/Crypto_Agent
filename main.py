@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from playwright.async_api import async_playwright
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
+import asyncio
 
 from google import genai
 from agents import Agent, Runner, AsyncOpenAI, OpenAIChatCompletionsModel
