@@ -44,22 +44,13 @@ context: BrowserContext = None
 page: Page = None
 crypto_signals = []
 
-@app.websocket("/ws")
-async def websocket_endpoint(websocket: WebSocket):
-    await websocket.accept()
-    try:
-        while True:
-            await asyncio.sleep(5)
-
-            if crypto_signals:
-                json_data = jsonable_encoder(crypto_signals[-1])
-                await websocket.send_json(json_data)
-    except WebSocketDisconnect:
-        print("❌ WebSocket client disconnected")
-    except Exception as e:
-        print(f"⚠️ WebSocket send error: {e}")
-
-
+@app.post("/signals")
+async def get_latest_signal(request: Request):
+    if crypto_signals:
+        latest_signal = crypto_signals[-1]
+        return JSONResponse(content=jsonable_encoder(latest_signal))
+    else:
+        return JSONResponse(content={"message": "No signals yet"}, status_code=404)
         
 @app.on_event("startup")
 async def startup():
