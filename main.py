@@ -168,6 +168,6 @@ Be decisive, think deeply, and aim to give a **profitable signal**.
         print("🔁 All coins done. Restarting...\n")
 
 @app.get("/")
-async def Crypto_Agent():
+def Crypto_Agent():
     return {"trader":crypto_signals[-1]}
 
