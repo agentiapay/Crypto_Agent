@@ -44,13 +44,13 @@ context: BrowserContext = None
 page: Page = None
 crypto_signals = []
 
-@app.post("/signals")
-async def get_latest_signal(request: Request):
-    if crypto_signals:
-        latest_signal = crypto_signals[-1]
-        return JSONResponse(content=jsonable_encoder(latest_signal))
-    else:
-        return JSONResponse(content={"message": "No signals yet"}, status_code=404)
+# @app.post("/signals")
+# async def get_latest_signal(request: Request):
+#     if crypto_signals:
+#         latest_signal = crypto_signals[-1]
+#         return JSONResponse(content=jsonable_encoder(latest_signal))
+#     else:
+#         return JSONResponse(content={"message": "No signals yet"}, status_code=404)
         
 @app.on_event("startup")
 async def startup():
@@ -169,5 +169,5 @@ Be decisive, think deeply, and aim to give a **profitable signal**.
 
 @app.get("/")
 async def Crypto_Agent():
-    return {"trader":"crypto signals"}
+    return {"trader":crypto_signals[-1]}
 
