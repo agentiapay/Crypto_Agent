@@ -11,6 +11,5 @@ openai
 google
 google-genai
 playwright
-playwright install chromium,
-playwright install,
-Playwright Team
+chromium
+
