@@ -35,7 +35,7 @@ COINS = [
     "PEPEUSDT", "WIFUSDT", "SUIUSDT", "SEIUSDT", "FETUSDT"
 ]
 
-SCREENSHOT_PATH = "screenshot.png"
+# SCREENSHOT_PATH = "screenshot.png"
 
 # Globals
 playwright = None
@@ -75,7 +75,7 @@ async def capture_loop():
                 await asyncio.sleep(5)  # Ensure full render
 
                 # 📸 Take full page screenshot
-                await page.screenshot(path=SCREENSHOT_PATH, full_page=False)
+                path1 = await page.screenshot(full_page=False)
                 print(f"📸 Screenshot saved for {coin}")
                 await page.close()
 
@@ -94,11 +94,11 @@ async def capture_loop():
                     return Signals_Data
 
                 Trend, Coins, MA, Volume, Candles = await asyncio.gather(
-    crypto_trader("screenshot.png", Trend_Data),
-    crypto_trader("screenshot.png", Coins_Data),
-    crypto_trader("screenshot.png", MA_Data),
-    crypto_trader("screenshot.png", Volume_Data),
-    crypto_trader("screenshot.png", Candles_Data),
+    crypto_trader(path1, Trend_Data),
+    crypto_trader(path1, Coins_Data),
+    crypto_trader(path1, MA_Data),
+    crypto_trader(path1, Volume_Data),
+    crypto_trader(path1, Candles_Data),
 )
 
                 Crypto_Coins_Extracted_Details = f"""
